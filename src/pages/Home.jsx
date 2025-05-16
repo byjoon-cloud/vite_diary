@@ -21,15 +21,37 @@ const getMonthlyData = (pivotDate, data) => {
     59,
     59
   ).getTime();
-  return data.filter(
-    (item) => item.createdDate >= beginTime && item.createdDate <= endTime
-  );
+
+  console.log("Filtering dates:", {
+    beginTime: new Date(beginTime).toLocaleString(),
+    endTime: new Date(endTime).toLocaleString(),
+    data: data.map((item) => ({
+      ...item,
+      createdDate: new Date(item.createdDate).toLocaleString(),
+    })),
+  });
+
+  return data.filter((item) => {
+    const itemDate = new Date(item.createdDate);
+    return (
+      itemDate.getFullYear() === pivotDate.getFullYear() &&
+      itemDate.getMonth() === pivotDate.getMonth()
+    );
+  });
 };
 
 const Home = () => {
   const data = useContext(DiaryStateContext);
   const [pivotDate, setPivotDate] = useState(new Date());
   const monthlyData = getMonthlyData(pivotDate, data);
+
+  console.log("Current data:", {
+    pivotDate: pivotDate.toLocaleString(),
+    monthlyData: monthlyData.map((item) => ({
+      ...item,
+      createdDate: new Date(item.createdDate).toLocaleString(),
+    })),
+  });
 
   const onIncreaseMonth = () => {
     setPivotDate(

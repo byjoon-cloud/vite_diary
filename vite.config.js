@@ -13,6 +13,8 @@ export default defineConfig(({ command }) => {
           manualChunks: undefined,
         },
       },
+      sourcemap: true,
+      minify: false,
     },
   };
 
