@@ -31,18 +31,29 @@ const getMonthlyData = (pivotDate, data) => {
     })),
   });
 
-  return data.filter((item) => {
+  // 각 데이터의 날짜를 확인하고 로그 출력
+  const filteredData = data.filter((item) => {
     const itemDate = new Date(item.createdDate);
-    return (
+    const isInMonth =
       itemDate.getFullYear() === pivotDate.getFullYear() &&
-      itemDate.getMonth() === pivotDate.getMonth()
-    );
+      itemDate.getMonth() === pivotDate.getMonth();
+
+    console.log("Checking date:", {
+      itemId: item.id,
+      itemDate: itemDate.toLocaleString(),
+      pivotDate: pivotDate.toLocaleString(),
+      isInMonth,
+    });
+
+    return isInMonth;
   });
+
+  return filteredData;
 };
 
 const Home = () => {
   const data = useContext(DiaryStateContext);
-  const [pivotDate, setPivotDate] = useState(new Date());
+  const [pivotDate, setPivotDate] = useState(new Date(2025, 4, 1));
   const monthlyData = getMonthlyData(pivotDate, data);
 
   console.log("Current data:", {
