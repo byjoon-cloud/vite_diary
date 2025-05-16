@@ -7,8 +7,11 @@
     <title>감정 일기장</title>
     <meta property="og:title" content="감정 일기장" />
     <meta property="og:description" content="감정 일기를 작성해보세요." />
-    <meta property="og:image" content="%VITE_OG_IMAGE_URL%/thumbnail.png" />
-    <meta property="og:url" content="%VITE_OG_IMAGE_URL%" />
+    <meta
+      property="og:image"
+      content="https://vite-diary.vercel.app/thumbnail.png"
+    />
+    <meta property="og:url" content="https://vite-diary.vercel.app" />
     <meta property="og:type" content="website" />
     <script type="text/javascript">
       // GitHub Pages SPA 라우팅 처리
@@ -29,20 +32,9 @@
         }
       })(window.location);
     </script>
-    <script>
-      // 현재 호스트에 따라 og:image URL 설정
-      const host = window.location.hostname;
-      const ogImage = document.getElementById("og-image");
-      if (host.includes("github.io")) {
-        ogImage.content =
-          "https://byjoon-cloud.github.io/vite_diary/thumbnail.png";
-      } else {
-        ogImage.content = "https://vite-diary.vercel.app/thumbnail.png";
-      }
-    </script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="./src/main.jsx"></script>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
