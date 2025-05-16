@@ -88,7 +88,7 @@ function App() {
     dispatch({
       type: "UPDATE",
       data: {
-        id,
+        id: Number(id),
         createdDate,
         emotionId,
         content,
