@@ -15,6 +15,7 @@ const reducer = (state, action) => {
   let newState = [];
   switch (action.type) {
     case "INIT": {
+      console.log("Reducer INIT:", action.data);
       return action.data;
     }
     case "CREATE": {
@@ -35,6 +36,7 @@ const reducer = (state, action) => {
       newState = state;
     }
   }
+  console.log("Reducer newState:", newState);
   localStorage.setItem("diary", JSON.stringify(newState));
   return newState;
 };
@@ -46,22 +48,33 @@ function App() {
   const idRef = useRef(0);
 
   useEffect(() => {
+    console.log("=== App Data Loading ===");
     const localData = localStorage.getItem("diary");
+    console.log("1. Raw localStorage data:", localData);
+
     if (!localData) {
+      console.log("2. No data in localStorage");
       setIsLoading(false);
       return;
     }
+
     const parsedData = JSON.parse(localData);
+    console.log("3. Parsed data:", parsedData);
+
     if (!Array.isArray(parsedData)) {
+      console.log("4. Data is not an array");
       setIsLoading(false);
       return;
     }
+
     let maxId = 0;
     parsedData.forEach((item) => {
       if (Number(item.id) > maxId) {
         maxId = Number(item.id);
       }
     });
+    console.log("5. Max ID:", maxId);
+
     idRef.current = maxId + 1;
     dispatch({ type: "INIT", data: parsedData });
     setIsLoading(false);
@@ -74,6 +87,7 @@ function App() {
   // localStorage.clear();
 
   const onCreate = (createdDate, emotionId, content) => {
+    console.log("Creating new diary:", { createdDate, emotionId, content });
     dispatch({
       type: "CREATE",
       data: {
@@ -86,6 +100,7 @@ function App() {
   };
 
   const onUpdate = (id, createdDate, emotionId, content) => {
+    console.log("Updating diary:", { id, createdDate, emotionId, content });
     dispatch({
       type: "UPDATE",
       data: {
@@ -98,6 +113,7 @@ function App() {
   };
 
   const onDelete = (id) => {
+    console.log("Deleting diary:", id);
     dispatch({
       type: "DELETE",
       id,
