@@ -11,7 +11,7 @@ const DiaryList = ({ data }) => {
     setSortType(e.target.value);
   };
   if (!data) {
-    return <div>데이터를 불러오는 중입니다.</div>;
+    return <div>데이터를 불러오는 중 : DiaryList.jsx</div>;
   }
   const getSortedData = () => {
     return data.toSorted((a, b) => {

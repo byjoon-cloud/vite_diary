@@ -8,6 +8,9 @@ const Diary = () => {
   const nav = useNavigate();
   const Params = useParams();
   const curDiaryItem = useDiary(Params.id);
+  if (!curDiaryItem) {
+    return <div>데이터 부르는 중 : Diary.jsx</div>;
+  }
 
   const { id, createdDate, emotionId, content } = curDiaryItem;
 

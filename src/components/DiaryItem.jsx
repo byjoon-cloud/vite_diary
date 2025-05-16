@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const DiaryItem = ({ id, emotionId, content, createdDate }) => {
   const nav = useNavigate();
   if (!id) {
-    return <div>일기를 불러오는 중입니다.</div>;
+    return <div>일기를 불러오는 중 : DiaryItem.jsx</div>;
   }
   return (
     <div className="DiaryItem">
