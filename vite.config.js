@@ -11,6 +11,12 @@ export default defineConfig(({ command, mode }) => {
       rollupOptions: {
         output: {
           manualChunks: undefined,
+          assetFileNames: (assetInfo) => {
+            if (assetInfo.name.endsWith(".png")) {
+              return "assets/[name][extname]";
+            }
+            return "assets/[name]-[hash][extname]";
+          },
         },
       },
       sourcemap: true,
@@ -19,11 +25,14 @@ export default defineConfig(({ command, mode }) => {
   };
 
   // 배포 환경에 따라 base 설정
-  if (mode === "github") {
+  if (mode === "vercel") {
+    // Vercel 배포 시
+    config.base = "https://vite-diary.vercel.app/";
+  } else if (mode === "github") {
     // GitHub Pages 배포 시
     config.base = command === "build" ? "/vite_diary/" : "/";
   } else {
-    // Vercel 배포 시
+    // 로컬 개발 시
     config.base = "/";
   }
 
