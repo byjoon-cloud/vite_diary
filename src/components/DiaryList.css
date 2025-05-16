@@ -18,3 +18,10 @@
 .DiaryList .menu_bar button {
   flex: 1;
 }
+
+.DiaryList .list_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 0;
+}
