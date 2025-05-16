@@ -22,6 +22,8 @@ export default defineConfig(({ command, mode }) => {
   if (mode === "github") {
     // GitHub Pages 배포 시
     config.base = command === "build" ? "/vite_diary/" : "/";
+    // GitHub Pages 배포 시 assets 경로 설정
+    config.build.assetsDir = "vite_diary/assets";
   } else {
     // Vercel 배포 시
     config.base = "/";
