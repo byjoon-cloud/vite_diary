@@ -8,9 +8,7 @@ const Diary = () => {
   const nav = useNavigate();
   const Params = useParams();
   const curDiaryItem = useDiary(Params.id);
-  if (!curDiaryItem) {
-    return <div>일기를 불러오는 중입니다.</div>;
-  }
+
   const { id, createdDate, emotionId, content } = curDiaryItem;
 
   return (

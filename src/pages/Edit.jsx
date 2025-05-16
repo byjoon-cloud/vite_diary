@@ -11,9 +11,6 @@ const Edit = () => {
   const nav = useNavigate();
   const { onDelete, onUpdate } = useContext(DiaryDispatchContext);
   const currentDiaryItem = useDiary(Params.id);
-  if (!currentDiaryItem) {
-    return <div>일기를 불러오는 중입니다.</div>;
-  }
 
   const onClickDeleteButton = () => {
     if (!window.confirm("정말 삭제하시겠습니까?")) {
