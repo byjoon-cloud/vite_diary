@@ -8,18 +8,6 @@ const DiaryList = ({ data }) => {
   const nav = useNavigate();
   const [sortType, setSortType] = useState("newest");
 
-  console.log("=== DiaryList Debug Info ===");
-  console.log("1. Received data length:", data.length);
-  console.log(
-    "2. Raw data with timestamps:",
-    data.map((item) => ({
-      id: item.id,
-      timestamp: item.createdDate,
-      date: new Date(item.createdDate).toLocaleString(),
-      content: item.content,
-    }))
-  );
-
   const handleChangeSortType = (e) => {
     setSortType(e.target.value);
   };
@@ -29,48 +17,11 @@ const DiaryList = ({ data }) => {
   }
 
   const getSortedData = () => {
-    console.log(
-      "3. Before sorting - data:",
-      data.map((item) => ({
-        id: item.id,
-        timestamp: item.createdDate,
-        date: new Date(item.createdDate).toLocaleString(),
-      }))
-    );
-
-    const sorted = data.toSorted((a, b) => {
-      const result =
-        sortType === "newest"
-          ? Number(b.createdDate) - Number(a.createdDate)
-          : Number(a.createdDate) - Number(b.createdDate);
-
-      console.log(`4. Comparing dates:`, {
-        a: {
-          id: a.id,
-          date: new Date(a.createdDate).toLocaleString(),
-          timestamp: a.createdDate,
-        },
-        b: {
-          id: b.id,
-          date: new Date(b.createdDate).toLocaleString(),
-          timestamp: b.createdDate,
-        },
-        result,
-      });
-
-      return result;
+    return data.toSorted((a, b) => {
+      return sortType === "newest"
+        ? Number(b.createdDate) - Number(a.createdDate)
+        : Number(a.createdDate) - Number(b.createdDate);
     });
-
-    console.log(
-      "5. After sorting - data:",
-      sorted.map((item) => ({
-        id: item.id,
-        timestamp: item.createdDate,
-        date: new Date(item.createdDate).toLocaleString(),
-      }))
-    );
-
-    return sorted;
   };
 
   const sortedData = getSortedData();
@@ -89,14 +40,9 @@ const DiaryList = ({ data }) => {
         />
       </div>
       <div className="list_wrapper">
-        {sortedData.map((item) => {
-          console.log("6. Rendering item:", {
-            id: item.id,
-            timestamp: item.createdDate,
-            date: new Date(item.createdDate).toLocaleString(),
-          });
-          return <DiaryItem key={item.id} {...item} />;
-        })}
+        {sortedData.map((item) => (
+          <DiaryItem key={item.id} {...item} />
+        ))}
       </div>
     </div>
   );

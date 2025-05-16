@@ -6,13 +6,6 @@ import { useNavigate } from "react-router-dom";
 const DiaryItem = ({ id, emotionId, content, createdDate }) => {
   const nav = useNavigate();
 
-  console.log("DiaryItem 렌더링:", {
-    id,
-    emotionId,
-    content,
-    createdDate: new Date(createdDate).toLocaleString(),
-  });
-
   if (id === undefined || id === null) {
     return <div>일기를 불러오는 중 : DiaryItem.jsx</div>;
   }
