@@ -30,9 +30,6 @@ const Home = () => {
   const data = useContext(DiaryStateContext);
   const [pivotDate, setPivotDate] = useState(new Date());
   const monthlyData = getMonthlyData(pivotDate, data);
-  if (!monthlyData) {
-    return <div>일기를 불러오는 중입니다.</div>;
-  }
 
   const onIncreaseMonth = () => {
     setPivotDate(
